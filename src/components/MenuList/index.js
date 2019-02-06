@@ -5,16 +5,16 @@ export default class MenuList extends Component {
         return (
             <ul>
                 <li>
-                    <a href="#">Inbox</a>
+                    <span onClick={() => {this.props.switchFolder('inbox')}}>Inbox</span>
                 </li>
                 <li>
-                    <a href="#">Drafts</a>
+                    <span onClick={() => {this.props.switchFolder('drafts')}}>Drafts</span>
                 </li>
                 <li>
-                    <a href="#">Send</a>
+                    <span onClick={() => {this.props.switchFolder('send')}}>Send</span>
                 </li>
                 <li>
-                    <a href="#">Trash</a>
+                    <span onClick={() => {this.props.switchFolder('trash')}}>Trash</span>
                 </li>
             </ul>
         )

@@ -1,13 +1,30 @@
 import React, { Component } from 'react'
 import NewMailForm from '../NewMailForm'
+import MailItem from './MailItem'
 import { mailList } from '../../dummy'
+
 export default class MailList extends Component {
+    state = {
+        openId : '',
+    };
+    openMail = (id) => {
+         if (this.state.openId !== id) {
+             this.setState({
+                 openId: id,
+             });
+         } else {
+             this.setState({
+                 openId: '',
+             });
+         }
+    };
     render() {
-        let mails = mailList.map( (mail) => {
+        const {activeFolder} = this.props;
+        let mails = mailList[activeFolder].map( (mail) => {
             return (
-                <li key={mail.id}>{mail.from} - {mail.subject}</li>
+                <MailItem key={mail.id} mail={mail} currentShowId={this.state.openId} openMail={this.openMail}/>
             )
-        })
+        });
         return (
             <div>
                 <ul>

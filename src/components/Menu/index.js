@@ -8,7 +8,7 @@ export default class Menu extends Component {
         return (
             <div>
                 <NewMail show={this.props.showModalWindow} />
-                <MenuList/>
+                <MenuList switchFolder = {this.props.switchFolder}/>
             </div>
         )
     }

@@ -9,21 +9,28 @@ import './App.scss';
 
 class App extends Component {
     state = {
-        showModal: false
-    }
+        showModal: false,
+        activeFolder: 'inbox',
+    };
 
     showModalToggle = () => {
         this.setState({
             showModal: !this.state.showModal
         })
-    }
+    };
+
+    switchFolder = (folder) => {
+        this.setState({
+            activeFolder: folder,
+        });
+    };
 
   render() {
     return (
         <>
             <Header />
-            <Menu showModalWindow={this.showModalToggle} />
-            <MailList showModal={this.state.showModal}/>
+            <Menu showModalWindow={this.showModalToggle}  switchFolder = {this.switchFolder}/>
+            <MailList activeFolder={this.state.activeFolder} showModal={this.state.showModal}/>
             {/*<WelcomeDialog />*/}
             <CustomTextInput />
         </>
