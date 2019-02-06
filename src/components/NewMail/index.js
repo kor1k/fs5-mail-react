@@ -4,7 +4,7 @@ export default class NewMail extends Component {
     render() {
         return (
             <>
-                <button>New mail</button>
+                <button onClick={this.props.show}>New mail</button>
             </>
         )
     }

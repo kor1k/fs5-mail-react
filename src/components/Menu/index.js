@@ -7,7 +7,7 @@ export default class Menu extends Component {
     render() {
         return (
             <div>
-                <NewMail />
+                <NewMail show={this.props.showModalWindow} />
                 <MenuList/>
             </div>
         )
