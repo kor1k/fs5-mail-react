@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Main from './pages/Main'
 import Some from './pages/Some'
 
@@ -7,10 +7,13 @@ class App extends Component {
   render() {
     return (
         <>
-            <Route exact path="/" component={Main} />
-            <Route path="/some/static1/:id/:second" render={(props) => (
-                <Some {...props} data='some data'/>
-            )} />
+            <Switch>
+                <Route path="/some/:id" render={(props) => (
+                    <Some {...props} data='some data'/>
+                )} />
+                <Route path="/contacts" component={Some} />
+                <Route path="/" component={Main} />
+            </Switch>
         </>
     );
   }

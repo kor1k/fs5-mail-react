@@ -9,6 +9,7 @@ class Some extends Component {
         console.log('Some ====', this.props)
         return (
             <>
+                {this.props.match.params.id ? this.props.match.params.id : Some}
                 <WelcomeDialog />
             </>
         );

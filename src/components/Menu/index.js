@@ -6,7 +6,7 @@ import './Menu.scss'
 export default class Menu extends Component {
     render() {
         return (
-            <div>
+            <div className="col-4">
                 <NewMail show={this.props.showModalWindow} />
                 <MenuList switchFolder = {this.props.switchFolder}/>
             </div>

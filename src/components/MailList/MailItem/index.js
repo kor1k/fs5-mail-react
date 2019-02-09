@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom';
 
 export default class MailList extends Component {
     state = {
@@ -14,8 +15,10 @@ export default class MailList extends Component {
         return (
             <>
                 <li onClick={()=>{this.props.openMail(mail.id)}}>
-                    {mail.from} - <h6>{mail.subject}</h6>
-                    {this.props.currentShowId === mail.id ? <p>{mail.text}</p> : null}
+                    <NavLink to={`/mail/${mail.id}`}>
+                        {mail.from} - <h6>{mail.subject}</h6>
+                        {this.props.currentShowId === mail.id ? <p>{mail.text}</p> : null}
+                    </NavLink>
                 </li>
             </>
         )

@@ -5,7 +5,9 @@ import MailList from '../components/MailList'
 import { WelcomeDialog } from '../components/WelcomeDialog'
 import CustomTextInput from '../components/CustomTextInput'
 import logo from '../logo.svg';
+import { Route, Switch } from 'react-router-dom';
 import '../App.scss';
+import MailPage from "./MailPage";
 
 class Main extends Component {
     state = {
@@ -29,10 +31,20 @@ class Main extends Component {
         return (
             <>
                 <Header />
-                <Menu showModalWindow={this.showModalToggle}  switchFolder = {this.switchFolder}/>
-                <MailList activeFolder={this.state.activeFolder} showModal={this.state.showModal}/>
-                {/*<WelcomeDialog />*/}
-                <CustomTextInput />
+                <div className="container">
+                    <div className="row">
+                        <Menu showModalWindow={this.showModalToggle}  switchFolder = {this.switchFolder}/>
+                        <Switch>
+                            <Route path="/mail/:id" component={MailPage}/>
+                            <Route path="/" render={(props) => (
+                                <MailList {...props} activeFolder={this.state.activeFolder} showModal={this.state.showModal}/>
+                            )}/>
+                        </Switch>
+                    </div>
+                </div>
+                    {/*<WelcomeDialog />*/}
+                {/*<CustomTextInput />*/}
+
             </>
         );
     }
