@@ -25,7 +25,6 @@ class MailList extends Component {
             return (
                 <div>
                     <MailItem key={mail.id} mail={mail} currentShowId={this.state.openId} openMail={this.openMail}/>
-                    <button onClick={()=>{ this.props.delEmail(mail.id, this.props.mailsFromStore)}}>Удалить</button>
                 </div>
             )
         });
@@ -47,17 +46,5 @@ const mapStateToProps = (state) => {
         mailsFromStore: state.mails.mailList,
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        delEmail: (delID, mailList) => {
-            let newMailList = {...mailList }
-            for(let key in newMailList){
-                newMailList[key] = newMailList[key].filter( (item) => {
-                    return item.id != delID ? item : null
-                })
-            }
-            dispatch({ type: DEL_EMAIL, payload: {mailList: newMailList} })
-        }
-    }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(MailList)
+
+export default connect(mapStateToProps)(MailList)
