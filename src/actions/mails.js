@@ -1,0 +1,1 @@
+export const DEL_EMAIL= 'DEL_EMAIL'

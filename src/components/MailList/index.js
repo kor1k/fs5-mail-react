@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+import { DEL_EMAIL } from '../../actions/mails'
 import NewMailForm from '../NewMailForm'
 import MailItem from './MailItem'
-import { mailList } from '../../dummy'
 
-export default class MailList extends Component {
+class MailList extends Component {
     state = {
         openId : '',
     };
@@ -20,9 +21,12 @@ export default class MailList extends Component {
     };
     render() {
         const {activeFolder} = this.props;
-        let mails = mailList[activeFolder].map( (mail) => {
+        let mails = this.props.mailsFromStore[activeFolder].map( (mail) => {
             return (
-                <MailItem key={mail.id} mail={mail} currentShowId={this.state.openId} openMail={this.openMail}/>
+                <div>
+                    <MailItem key={mail.id} mail={mail} currentShowId={this.state.openId} openMail={this.openMail}/>
+                    <button onClick={()=>{ this.props.delEmail(mail.id, this.props.mailsFromStore)}}>Удалить</button>
+                </div>
             )
         });
         return (
@@ -35,3 +39,25 @@ export default class MailList extends Component {
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        // из стора мы берем переменную mailList
+        // и заимпортируем в наш компонент под именем
+        // mailList в пропсы
+        mailsFromStore: state.mails.mailList,
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        delEmail: (delID, mailList) => {
+            let newMailList = {...mailList }
+            for(let key in newMailList){
+                newMailList[key] = newMailList[key].filter( (item) => {
+                    return item.id != delID ? item : null
+                })
+            }
+            dispatch({ type: DEL_EMAIL, payload: {mailList: newMailList} })
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(MailList)
