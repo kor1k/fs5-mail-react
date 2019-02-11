@@ -1,7 +1,8 @@
-import { DEL_EMAIL, READ_EMAIL } from '../../actions/mails'
+import { DEL_MAIL_SUCCESS, DEL_MAIL_REQUEST, READ_EMAIL } from '../../actions/mails'
 import {mailList} from "../../dummy";
 
 const initialState = {
+    isFetching: false,
     mailList: {
         inbox : [
             {
@@ -51,8 +52,10 @@ function mails (state = initialState, action) {
             let updatedSentMailList = [...this.state.mailList.send];
             updatedSentMailList.push(action.payload)
             return {...state, mailList: {...this.state.mailList, send: [...updatedSentMailList]}}
-        case DEL_EMAIL:
-            return {...state,  ...action.payload}
+        case DEL_MAIL_REQUEST:
+            return { ...state, isFetching: true }
+        case DEL_MAIL_SUCCESS:
+            return {...state,  ...action.payload, isFetching: false}
         case READ_EMAIL:
             let newMails = state.mailList.inbox.map((mail) => {
                 if(mail.id === action.payload.id) {
