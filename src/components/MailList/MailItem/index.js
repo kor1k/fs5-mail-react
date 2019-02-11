@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import {delEmail} from "../../../actions/mails";
+import {delEmail, markAsRead} from "../../../actions/mails";
 
 class MailItem extends Component {
     state = {
@@ -15,13 +15,16 @@ class MailItem extends Component {
     render() {
         const {mail} = this.props;
         let isRead = mail.isRead ? 'read' : 'unread';
-        const mailItem = <li onClick={()=>{this.props.openMail(mail.id)}}>
-            <NavLink to={`/mail/${mail.id}`} className={isRead}>
-                {mail.from} - <h6>{mail.subject}</h6>
-                {this.props.currentShowId === mail.id ? <p>{mail.text}</p> : null}
-            </NavLink>
-            <button onClick={()=>{ this.props.delEmail(mail.id, this.props.mailsFromStore)}}>Удалить</button>
-        </li>
+        const mailItem =
+            <li onClick={()=>{this.props.openMail(mail.id)}}>
+                <NavLink to={`/mail/${mail.id}`} className={isRead}>
+                    {mail.from} - <h6>{mail.subject}</h6>
+                    {this.props.currentShowId === mail.id ? <p>{mail.text}</p> : null}
+                </NavLink>
+                <button onClick={()=>{ this.props.delEmail(mail.id, this.props.mailsFromStore)}}>Удалить</button>
+                <button onClick={()=>{ this.props.markAsRead(mail.id)}}>Прочитано</button>
+
+            </li>;
 
         return (
             <>
@@ -45,6 +48,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         delEmail: (delID, mailList) => {
             dispatch( delEmail(delID, mailList) )
+        },
+        markAsRead: (mailID) => {
+            dispatch(markAsRead(mailID))
         }
     }
 };

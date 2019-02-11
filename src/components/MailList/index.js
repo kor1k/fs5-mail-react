@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import { DEL_EMAIL } from '../../actions/mails'
+import {DEL_EMAIL, markAsRead, updateEmail} from '../../actions/mails'
 import NewMailForm from '../NewMailForm'
 import MailItem from './MailItem'
+
 
 class MailList extends Component {
     state = {
@@ -20,7 +21,8 @@ class MailList extends Component {
          }
     };
     render() {
-        const {activeFolder} = this.props;
+        const {activeFolder, isUpdating} = this.props;
+
         let mails = this.props.mailsFromStore[activeFolder].map( (mail) => {
             return (
                 <div>
@@ -30,8 +32,9 @@ class MailList extends Component {
         });
         return (
             <div className="col-8">
+                <button onClick={this.props.updateEmail}>Update</button>
                 <ul>
-                    {mails}
+                    {isUpdating ? <li>Updating...</li>: mails}
                 </ul>
                 {this.props.showModal ? <NewMailForm /> : null}
             </div>
@@ -44,7 +47,16 @@ const mapStateToProps = (state) => {
         // и заимпортируем в наш компонент под именем
         // mailList в пропсы
         mailsFromStore: state.mails.mailList,
+        isUpdating: state.mails.isUpdating
     }
 }
 
-export default connect(mapStateToProps)(MailList)
+const mapDispatchToProps =(dispatch) =>{
+    return {
+        updateEmail: ()=> {
+            dispatch(updateEmail())
+        },
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps )(MailList)

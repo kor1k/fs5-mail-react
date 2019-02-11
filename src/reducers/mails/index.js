@@ -1,8 +1,12 @@
-import { DEL_MAIL_SUCCESS, DEL_MAIL_REQUEST, READ_EMAIL } from '../../actions/mails'
+import {
+    DEL_MAIL_SUCCESS, DEL_MAIL_REQUEST, READ_EMAIL, START_UPDATE_MAIL_LIST, SUCCESS_UPDATE_MAIL_LIST,
+    START_MARK_AS_READ, SUCCESS_MARK_AS_READ
+} from '../../actions/mails'
 import {mailList} from "../../dummy";
 
 const initialState = {
     isFetching: false,
+    isUpdating: false,
     mailList: {
         inbox : [
             {
@@ -55,7 +59,7 @@ function mails (state = initialState, action) {
         case DEL_MAIL_REQUEST:
             return { ...state, isFetching: true }
         case DEL_MAIL_SUCCESS:
-            return {...state,  ...action.payload, isFetching: false}
+            return {...state,  ...action.payload, isFetching: false};
         case READ_EMAIL:
             let newMails = state.mailList.inbox.map((mail) => {
                 if(mail.id === action.payload.id) {
@@ -63,8 +67,16 @@ function mails (state = initialState, action) {
                 }
                 return mail;
             });
-            return {...state, mailList: {...this.state.mailList, inbox: newMails}}
-
+            return {...state, mailList: {...this.state.mailList, inbox: newMails}};
+        case START_UPDATE_MAIL_LIST:
+            return {...state, isUpdating: true};
+        case SUCCESS_UPDATE_MAIL_LIST:
+            return {...state, isUpdating: false};
+        case START_MARK_AS_READ:
+            return {...state, isUpdating: true};
+        case SUCCESS_MARK_AS_READ:
+            console.log('======',{...state, isUpdating: false, mailList: {inbox: [...action.payload.inbox]}})
+            return {...state, isUpdating: false, mailList: {inbox: [...action.payload.inbox]}};
         default:
             return {...state}
     }
