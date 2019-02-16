@@ -1,6 +1,8 @@
 import React from 'react'
 import MailItem from './index'
 
+
+//  надо не лениться и писать тесты :)
 describe('Feedback from container', () => {
     const mail = {
         id: 1,
@@ -16,12 +18,12 @@ describe('Feedback from container', () => {
         text: 'Mail text'
     }
     it('One mail render', () => {
-        const result = shallow(<MailItem mail={mail}/>)
+        const result = shallow(<MailItem mail={mail}/>);
         expect(result).toMatchSnapshot()
     });
     describe('Inside describe', () => {
         it('Inside test', () => {
-            const result = shallow(<MailItem mail={mail2}/>)
+            const result = shallow(<MailItem mail={mail2}/>);
             expect(result).toMatchSnapshot()
         });
     });
