@@ -1,4 +1,5 @@
 body {
+  background: white;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -11,4 +12,51 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.nav__bar_top {
+  background: #d1d2e6;
+  height: 30rem;
+}
+
+.nav__bar_top > .col-4 > button,
+.nav__bar_top > .col-8 > button{
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.nav__bar_top > .col-4 > ul > li {
+  cursor: pointer;
+  width: 100px;
+  font-size: 20px;
+  color: black;
+  margin: 10px 0px;
+}
+
+.search-inp {
+  margin: 25px 0;
+  margin-right: 20px;
+}
+
+.gmail-logotype {
+  margin-top: 14px;
+}
+
+
+.pages {
+  font-size: 20px;
+  margin: 20px 0px;
+}
+
+.pages > a {
+  color: black;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.nav_top_search_button {
+  border-radius: 5px;
+  background: black;
+  color: white;
+  font-weight: 600;
 }

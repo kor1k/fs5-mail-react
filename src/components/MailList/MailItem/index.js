@@ -21,8 +21,8 @@ class MailItem extends Component {
                     {mail.from} - <h6>{mail.subject}</h6>
                     {this.props.currentShowId === mail.id ? <p>{mail.text}</p> : null}
                 </NavLink>
-                <button onClick={()=>{ this.props.delEmail(mail.id, this.props.mailsFromStore)}}>Удалить</button>
-                <button onClick={()=>{ this.props.markAsRead(mail.id)}}>Прочитано</button>
+                <button onClick={()=>{ this.props.delEmail(mail.id, this.props.mailsFromStore)}}>Delete</button>
+                <button onClick={()=>{ this.props.markAsRead(mail.id)}}>Read it</button>
 
             </li>;
 

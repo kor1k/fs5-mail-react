@@ -8,7 +8,7 @@ const initialState = {
     isFetching: false,
     isUpdating: false,
     mailList: {
-        inbox : [
+        inbox: [
             {
                 id: 1,
                 isRead: false,
@@ -24,19 +24,19 @@ const initialState = {
                 text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias rerum architecto nisi et, quidem, odit a, velit vero id quae quam! Eligendi, in at sequi libero consequuntur architecto pariatur quo.'
             }
         ],
-        send : [
+        send: [
             {
                 id: 21,
                 isRead: false,
                 from: 'fray@futurama.com',
-                subject: 'I hate you!!!!!!!',
+                subject: 'Hi, I am Fray',
                 text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias rerum architecto nisi et, quidem, odit a, velit vero id quae quam! Eligendi, in at sequi libero consequuntur architecto pariatur quo.'
             },
             {
                 id: 22,
                 isRead: false,
                 from: 'fray-lover@futurama.com',
-                subject: 'I love you!!!!!!',
+                subject: 'I love you!',
                 text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias rerum architecto nisi et, quidem, odit a, velit vero id quae quam! Eligendi, in at sequi libero consequuntur architecto pariatur quo.'
             },
             {
@@ -50,19 +50,19 @@ const initialState = {
     },
 }
 
-function mails (state = initialState, action) {
-    switch (action.type){
+function mails(state = initialState, action) {
+    switch (action.type) {
         case 'SENT_EMAIL': //что делаем при отправке письма
             let updatedSentMailList = [...this.state.mailList.send];
             updatedSentMailList.push(action.payload)
             return {...state, mailList: {...this.state.mailList, send: [...updatedSentMailList]}}
         case DEL_MAIL_REQUEST:
-            return { ...state, isFetching: true }
+            return {...state, isFetching: true}
         case DEL_MAIL_SUCCESS:
-            return {...state,  ...action.payload, isFetching: false};
+            return {...state, ...action.payload, isFetching: false};
         case READ_EMAIL:
             let newMails = state.mailList.inbox.map((mail) => {
-                if(mail.id === action.payload.id) {
+                if (mail.id === action.payload.id) {
                     mail.isRead = true;
                 }
                 return mail;
@@ -75,10 +75,11 @@ function mails (state = initialState, action) {
         case START_MARK_AS_READ:
             return {...state, isUpdating: true};
         case SUCCESS_MARK_AS_READ:
-            console.log('======',{...state, isUpdating: false, mailList: {inbox: [...action.payload.inbox]}})
+            console.log('======', {...state, isUpdating: false, mailList: {inbox: [...action.payload.inbox]}})
             return {...state, isUpdating: false, mailList: {inbox: [...action.payload.inbox]}};
         default:
             return {...state}
     }
 }
+
 export default mails

@@ -32,7 +32,7 @@ class Main extends Component {
             <>
                 <Header />
                 <div className="container">
-                    <div className="row">
+                    <div className="row nav__bar_top">
                         <Menu showModalWindow={this.showModalToggle}  switchFolder = {this.switchFolder}/>
                         <Switch>
                             <Route path="/mail/:id" component={MailPage}/>

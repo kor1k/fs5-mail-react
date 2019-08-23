@@ -15,13 +15,13 @@ export default class SearchBar extends Component {
     render() {
         return (
             <>
-                <input 
-                    type="text" 
-                    className="search-inp" 
-                    value={this.state.searchVal} 
+                <input
+                    type="text"
+                    className="search-inp"
+                    value={this.state.searchVal}
                     onChange={this.chgSearch}
                 />
-                <button>Search</button>
+                <button className="nav_top_search_button">Search</button>
             </>
         )
     }
